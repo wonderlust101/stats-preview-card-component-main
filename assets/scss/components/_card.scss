@@ -1,0 +1,68 @@
+@use '../abstract' as a;
+
+.card {
+  display: grid;
+  @include a.set-grid-areas(picture, content);
+  width: min(40rem, 90%);
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background-color: var(--clr-primary-color-dark-desaturated-blue);
+
+  @include a.breakpoint(medium) {
+    width: min(80rem, 90%);
+    grid-template: 'content picture' / 1fr 1fr;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+      background-color: var(--clr-primary-color-soft-violet);
+      mix-blend-mode: multiply;
+    }
+  }
+
+  &__content {
+    display: grid;
+    gap: 2rem;
+    padding: 2rem 1rem;
+    text-align: center;
+
+    @include a.breakpoint(medium) {
+      padding: 3.75rem 6rem 3.75rem 3.75rem;
+      text-align: left;
+    }
+  }
+
+  &__text-area {
+    display: grid;
+    align-items: flex-start;
+    grid-template-rows: auto auto;
+    gap: 1rem;
+  }
+
+  &__stats {
+    display: grid;
+    @include a.set-grid-areas(companies, template, queries);
+    gap: 1.5rem;
+    text-transform: uppercase;
+
+    @include a.breakpoint(medium) {
+      align-items: flex-end;
+      grid-template: 'companies template queries';
+    }
+  }
+
+  &__stat-heading {
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--clr-neutral-color-slightly-transparent-white-60);
+  }
+}
